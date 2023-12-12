@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block content %}
-    <h1>{% trans "You should login/register to access Dashboard" %}</h1>
-    <a href="{% url 'accounts:login' %}">Login</a>
-    <a href="{% url 'accounts:register' %}">Register</a>
+    <h1>{% trans "You should login to access Dashboard" %}</h1>
+    <a href="{% url 'website:accounts:login' %}">Login</a>
+    <a href="{% url 'website:accounts:register' %}">Register</a>
 {% endblock %}

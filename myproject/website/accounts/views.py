@@ -1,6 +1,8 @@
+from django.contrib import messages
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
+
 from .forms import LoginForm, UserRegistrationForm
 
 
@@ -15,11 +17,12 @@ def user_login(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return HttpResponse('Authenticated successfully')
+                    return redirect('website:countries:index')
                 else:
                     return HttpResponse('Disabled account')
             else:
-                return HttpResponse('Invalid login')
+                messages.error(request, 'Invalid username or password.')
+                return redirect('website:accounts:login')
     else:
         form = LoginForm()
     return render(request, 'accounts/login.html', {'form': form})
@@ -35,7 +38,8 @@ def register(request):
             new_user.set_password(user_form.cleaned_data['password'])
             # Save the User object
             new_user.save()
-            return render(request, 'accounts/register_done.html', {'new_user': new_user})
+            messages.success(request, 'Congrats you are registered, please login!')
+            return redirect("website:accounts:login")
     else:
         user_form = UserRegistrationForm()
         return render(request, 'accounts/register.html', {'user_form': user_form})

@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     # ...
     # local
     'myproject.apps.accounts',
+    'myproject.apps.countries',
     'myproject.website',
 ]
 

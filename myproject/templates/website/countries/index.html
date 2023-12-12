@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+    <h1>{% trans "List Countries" %}</h1>
+    <a href="{% url 'website:countries:add_country' %}">Tambah Country</a>
+    <table border="1">
+      <tr>
+        <th>Country Name</th>
+        <th>Country Flag</th>
+        <th>Country Currency</th>
+        <th></th>
+        <th></th>
+      </tr>
+      {% for country in countries %}
+      <tr>
+        <td>{{country.country_name}}</td>
+        <td>{{country.country_flag}}</td>
+        <td>{{country.country_currency}}</td>
+        <td><a href="{% url 'website:countries:edit_country' country.id %}">Edit</a></td>
+        <td><a href="{% url 'website:countries:delete_country' country.id %}">Delete</a></td>
+      </tr>
+      {% endfor %}
+      <!-- Add more rows as needed -->
+    </table>
+{% endblock %}
