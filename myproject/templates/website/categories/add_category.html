@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+    <h1>{% trans "Add Category" %}</h1>
+<form method="post">
+    {% csrf_token %}
+
+    <!-- Loop through form fields -->
+    {% for field in form %}
+        <div class="field-wrapper">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            <!-- Display field errors if any -->
+            {% for error in field.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}

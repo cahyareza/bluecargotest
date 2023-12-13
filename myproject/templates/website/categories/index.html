@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+    <h1>{% trans "List Categories" %}</h1>
+    <a href="{% url 'website:categories:add_category' %}">Tambah Category</a>
+    <table border="1">
+      <tr>
+        <th>Country Id</th>
+        <th>Category Title</th>
+        <th>Price Per Kilo</th>
+        <th></th>
+        <th></th>
+      </tr>
+      {% for category in categories %}
+      <tr>
+        <td>{{category.country_id}}</td>
+        <td>{{category.category_title}}</td>
+        <td>{{category.price_per_kilo}}</td>
+        <td><a href="{% url 'website:categories:edit_category' category.id %}">Edit</a></td>
+        <td><a href="{% url 'website:categories:delete_category' category.id %}">Delete</a></td>
+      </tr>
+      {% endfor %}
+    </table>
+{% endblock %}

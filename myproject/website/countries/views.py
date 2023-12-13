@@ -28,14 +28,14 @@ def add_country(request):
 
 
 def edit_country(request, id):
-    list_countries = Country.objects.get(id=id)
+    country_instance = Country.objects.get(id=id)
     if request.method == 'POST':
-        form = CountryForm(request.POST or None, request.FILES)
+        form = CountryForm(request.POST or None, instance=country_instance)
         if form.is_valid():
             form.save()
         return redirect("website:countries:index")
     else:
-        form = CountryForm(request.POST or None, request.FILES)
+        form = CountryForm(request.POST or None, instance=country_instance)
 
     return render(request, "website/countries/add_country.html", {'form': form})
 
