@@ -1,45 +1,23 @@
 from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import login
 
-from .forms import LoginForm, UserRegistrationForm
-
-
-def user_login(request):
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            cd = form.cleaned_data
-            user = authenticate(request,
-                                username=cd['username'],
-                                password=cd['password'])
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    return redirect('website:countries:index')
-                else:
-                    return HttpResponse('Disabled account')
-            else:
-                messages.error(request, 'Invalid username or password.')
-                return redirect('website:accounts:login')
-    else:
-        form = LoginForm()
-    return render(request, 'accounts/login.html', {'form': form})
+from .forms import RegisterForm
 
 
 def register(request):
+    if request.method == 'GET':
+        form = RegisterForm()
+        return render(request, 'accounts/register.html', { 'form': form})
+
     if request.method == 'POST':
-        user_form = UserRegistrationForm(request.POST)
-        if user_form.is_valid():
-            # Create a new user object but avoid saving it yet
-            new_user = user_form.save(commit=False)
-            # Set the chosen password
-            new_user.set_password(user_form.cleaned_data['password'])
-            # Save the User object
-            new_user.save()
-            messages.success(request, 'Congrats you are registered, please login!')
-            return redirect("website:accounts:login")
-    else:
-        user_form = UserRegistrationForm()
-        return render(request, 'accounts/register.html', {'user_form': user_form})
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+            messages.success(request, 'You have singed up successfully. Please login!')
+            return redirect('website:index')
+        else:
+            return render(request, 'accounts/register.html', {'form': form})

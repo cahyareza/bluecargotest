@@ -174,3 +174,9 @@ REST_FRAMEWORK = {
 ], }
 
 RAJAONGKIR_API = get_secret('RAJAONGKIR_API')
+
+# LOGIN/LOGOUT
+LOGIN_REDIRECT_URL = 'website:dashboard'
+LOGOUT_REDIRECT_URL = 'website:index'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <h1>Dashboard</h1>
+    {% if request.user.is_authenticated %}
+        <a href="{% url "logout" %}">Logout</a>
+        <p>Hello {{ request.user }}!</p>
+    {% endif %}
+
+    <!-- List Countries -->
+    <h2>{% trans "List Countries" %}</h2>
+    <table border="1">
+      <tr>
+        <th>Country Name</th>
+        <th>Country Flag</th>
+        <th>Country Currency</th>
+      </tr>
+      {% for country in countries %}
+      <tr>
+        <td>{{country.country_name}}</td>
+        <td>{{country.country_flag}}</td>
+        <td>{{country.country_currency}}</td>
+      </tr>
+      {% endfor %}
+      <!-- Add more rows as needed -->
+    </table>
+    <a href="{% url 'website:countries:index' %}">More Country!</a>
+
+
+    <h2>{% trans "List Categories" %}</h2>
+    <table border="1">
+      <tr>
+        <th>Country Id</th>
+        <th>Category Title</th>
+        <th>Price Per Kilo</th>
+      </tr>
+      {% for category in categories %}
+      <tr>
+        <td>{{category.country_id}}</td>
+        <td>{{category.category_title}}</td>
+        <td>{{category.price_per_kilo}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    <a href="{% url 'website:categories:index' %}">More Category!</a>
+{% endblock %}

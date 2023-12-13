@@ -1,13 +1,22 @@
-{% extends "base.html" %}
-
-{% block title %}Create an account{% endblock %}
+{% extends 'base.html' %}
 
 {% block content %}
-    <h1>Create an account</h1>
-    <p>Please, sign up using the following form:</p>
-    <form method="post">
-        {{ user_form.as_p }}
-        {% csrf_token %}
-        <p><input type="submit" value="Create my account"></p>
-    </form>
-{% endblock %}
+<form method="POST" novalidate>
+	{% csrf_token %}
+	<h2>Sign Up</h2>
+
+	{% for field in form %}
+	<p>
+		{% if field.errors %}
+		<ul class="errorlist">
+			{% for error in field.errors %}
+			<li>{{ error }}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+	 	{{ field.label_tag }} {{ field }}
+	</p>
+	{% endfor %}
+	<input type="submit" value="Register" />
+</form>
+{% endblock content%}

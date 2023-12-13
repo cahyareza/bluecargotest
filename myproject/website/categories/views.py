@@ -7,9 +7,9 @@ from myproject.website.categories.forms import CategoryForm
 
 @login_required
 def categories(request):
-    list_countries = Category.objects.all()
+    list_categories = Category.objects.all()
     context = {
-        'categories': list_countries
+        'categories': list_categories
     }
     return render(request, 'website/categories/index.html', context)
 
