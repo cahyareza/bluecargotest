@@ -133,3 +133,11 @@ dmypy.json
 
 # Secrets
 secrets.json
+secrets.yml
+
+# deployment
+deployment
+
+# Vagrant / Ansible
+.vagrant
+*.retry
