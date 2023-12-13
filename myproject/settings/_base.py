@@ -172,3 +172,5 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication', # new
 ], }
+
+RAJAONGKIR_API = get_secret('RAJAONGKIR_API')
