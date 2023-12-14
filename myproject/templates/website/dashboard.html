@@ -50,4 +50,7 @@
       {% endfor %}
     </table>
     <a href="{% url 'website:categories:index' %}">More Category!</a>
+
+    <h2>{% trans "Price Simulation" %}</h2>
+    <p>Go to <a href="{% url 'website:calculation:index' %}">Simulation</a>!</p>
 {% endblock %}

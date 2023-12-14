@@ -202,7 +202,7 @@ Untuk mencari category dari country asal dapat mengunakan link sbb
 http://34.73.171.215/en/api/categories/?country_id={example_1}&search={example_2}})
 
 # contoh
-http://34.73.171.215/en/api/categories/?country_id=21&search=chip
+http://34.73.171.215/en/api/categories/?country_id=6&search=chip
 ```
 - note : example_1 dapat diganti dengan informasi country_id dan example_2 dapat diganti informasi pada tabel category title atau price per kilo.
 
