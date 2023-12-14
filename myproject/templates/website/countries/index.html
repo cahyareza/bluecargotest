@@ -6,6 +6,7 @@
     <p>Back to <a href="{% url 'website:dashboard' %}">Dashboard</a></p>
     <table border="1">
       <tr>
+        <th>Country Id</th>
         <th>Country Name</th>
         <th>Country Flag</th>
         <th>Country Currency</th>
@@ -14,6 +15,7 @@
       </tr>
       {% for country in countries %}
       <tr>
+        <td>{{country.id}}</td>
         <td>{{country.country_name}}</td>
         <td><img src="{{ country.country_flag }}" alt="Country Flag" width="70" height="40"></td>
         <td>{{country.country_currency}}</td>

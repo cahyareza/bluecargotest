@@ -6,6 +6,7 @@
     <p>Back to <a href="{% url 'website:dashboard' %}">Dashboard</a></p>
     <table border="1">
       <tr>
+        <th>Category Id</th>
         <th>Country Id</th>
         <th>Category Title</th>
         <th>Price Per Kilo</th>
@@ -14,7 +15,8 @@
       </tr>
       {% for category in categories %}
       <tr>
-        <td>{{category.country_id}}</td>
+        <td>{{category.id}}</td>
+        <td>{{category.country_id.id}}</td>
         <td>{{category.category_title}}</td>
         <td>{{category.price_per_kilo}}</td>
         <td><a href="{% url 'website:categories:edit_category' category.id %}">Edit</a></td>
