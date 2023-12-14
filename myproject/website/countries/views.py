@@ -14,6 +14,7 @@ def countries(request):
     return render(request, 'website/countries/index.html', context)
 
 
+@login_required
 def add_country(request):
     if request.method == 'POST':
         form = CountryForm(request.POST or None)
@@ -27,6 +28,7 @@ def add_country(request):
     return render(request, "website/countries/add_country.html", {'form': form})
 
 
+@login_required
 def edit_country(request, id):
     country_instance = Country.objects.get(id=id)
     if request.method == 'POST':
@@ -40,6 +42,7 @@ def edit_country(request, id):
     return render(request, "website/countries/add_country.html", {'form': form})
 
 
+@login_required
 def delete_country(request, id):
     country = get_object_or_404(Country, id=id)
     country.delete()

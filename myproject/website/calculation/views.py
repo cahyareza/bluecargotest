@@ -34,7 +34,6 @@ def calculation(request):
     }
 
     response = requests.get(url, headers=headers)
-    print(categoriesstring)
     if response.status_code == 200:
         data = response.json()
         results = data['rajaongkir']['results']

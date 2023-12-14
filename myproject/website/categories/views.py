@@ -14,6 +14,7 @@ def categories(request):
     return render(request, 'website/categories/index.html', context)
 
 
+@login_required
 def add_category(request):
     if request.method == 'POST':
         form = CategoryForm(request.POST or None)
@@ -27,6 +28,7 @@ def add_category(request):
     return render(request, "website/categories/add_category.html", {'form': form})
 
 
+@login_required
 def edit_category(request, id):
     category_instance = Category.objects.get(id=id)
     if request.method == 'POST':
@@ -40,6 +42,7 @@ def edit_category(request, id):
     return render(request, "website/categories/add_category.html", {'form': form})
 
 
+@login_required
 def delete_category(request, id):
     category = get_object_or_404(Category, id=id)
     category.delete()
