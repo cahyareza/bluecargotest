@@ -3,7 +3,7 @@
 
 {% block content %}
     <h1>{% trans "List Categories" %}</h1>
-    <a href="{% url 'website:categories:add_category' %}">Tambah Category</a>
+    <p>Back to <a href="{% url 'website:dashboard' %}">Dashboard</a></p>
     <table border="1">
       <tr>
         <th>Country Id</th>
@@ -22,4 +22,5 @@
       </tr>
       {% endfor %}
     </table>
+    <a href="{% url 'website:categories:add_category' %}">Tambah Category</a>
 {% endblock %}
