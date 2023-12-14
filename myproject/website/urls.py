@@ -9,4 +9,5 @@ urlpatterns = [
     path('accounts/', include(('myproject.website.accounts.urls', "accounts"), namespace='accounts')),
     path('countries/', include(('myproject.website.countries.urls', "countries"), namespace="countries")),
     path('categories/', include(('myproject.website.categories.urls', "categories"), namespace="categories")),
+    path('calculation/', include(('myproject.website.calculation.urls', "calculation"), namespace="calculation")),
 ]
