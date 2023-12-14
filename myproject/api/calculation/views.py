@@ -14,7 +14,7 @@ class FreightCalculationView(APIView):
         serializer = FreightCalculationSerializer(data=request.data)
         if serializer.is_valid():
             country_id = serializer.validated_data['country_id']
-            category_title = serializer.validated_data['category_title']
+            category_id = serializer.validated_data['category_id']
             origin_domestic_id = "444" # surabaya
             destination_id = serializer.validated_data['destination_id']
             weight = serializer.validated_data['weight']
@@ -22,7 +22,7 @@ class FreightCalculationView(APIView):
 
             # Fetch necessary data from models
             country = Country.objects.get(id=country_id)
-            category = get_object_or_404(Category, category_title=category_title, country_id=country.id)
+            category = get_object_or_404(Category, id=category_id)
 
             # Perform calculations international_price
             international_price = weight * category.price_per_kilo
@@ -32,14 +32,13 @@ class FreightCalculationView(APIView):
 
             headers = {
                 'key': settings.RAJAONGKIR_API,
-                'content-type': "application/x-www-form-urlencoded"
+                'content-type': "application/x-www-form-urlencoded",
             }
 
             response = requests.get(url, headers=headers)
             if response.status_code == 200:
                 data = response.json()
-                results = data['rajaongkir']['results']
-                destination = results["city_name"]
+                destination = data['rajaongkir']['results']
             else:
                 destination = "Cannot get data city from raja ongkir"
 
